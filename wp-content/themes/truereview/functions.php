@@ -17,6 +17,62 @@
  */
 define( 'PREFIX', 'truereview-' );
 
+//
+
+
+// Our custom post type function
+function create_posttype()
+{
+
+    register_post_type('story',
+        // CPT Options
+        array(
+            'labels' => array(
+                'name' => __('story'),
+                'singular_name' => __('story'),
+            ),
+            'public' => true,
+            'has_archive' => true,
+            'rewrite' => array('slug' => 'story'),
+            'show_in_rest' => true,
+
+        )
+    );
+}
+// Hooking up our function to theme setup
+add_action('init', 'create_posttype');
+
+
+function myStoryParent( $post_data = false ) {
+$scr = get_current_screen();
+$value ='';
+if ( $post_data ) {
+$t = get_post($post_data);
+$a = get_post($t->post_parent);
+$value = $a->post_title;
+}
+if ($scr->id == 'story')
+echo '<label>Thuộc truyện: <input type="text" name="parent" value="'.$value.'" /></label> (Tên của cuốn truyện gốc)<br /><br />';
+}
+add_action('edit_form_after_title', 'myStoryParent');
+
+
+function save_mystory($post_id)
+{
+    $story = isset($_POST['parent']) ? get_page_by_title($_POST['parent'], 'OBJECT', 'post') : false;
+    if (!wp_is_post_revision($post_id) && $story) {
+        remove_action('save_post', 'save_mystory');
+        $postdata = array(
+            'ID' => $_POST['ID'],
+            'post_parent' => $story->ID,
+        );
+        wp_update_post($postdata);
+        add_action('save_post', 'save_mystory');
+    }
+}
+add_action('save_post', 'save_mystory');
+
+
 /**
  * Sets the content width in pixels, based on the theme's design and stylesheet.
  *

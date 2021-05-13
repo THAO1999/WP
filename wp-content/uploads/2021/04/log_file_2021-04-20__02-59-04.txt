@@ -1,0 +1,19 @@
+
+---Downloaded files---
+The import files for: Demo Standard were successfully downloaded!
+Initial max execution time = 120
+Files info:
+Site URL = http://localhost/WordPress
+Data file = C:\xampp\htdocs\WordPress/wp-content/themes/truereview/inc/demo/dummy-data.xml
+Widget file = C:\xampp\htdocs\WordPress/wp-content/themes/truereview/inc/demo/widgets.wie
+Customizer file = C:\xampp\htdocs\WordPress/wp-content/themes/truereview/inc/demo/customizer.dat
+Redux files:
+not defined!
+
+------
+New AJAX call!
+[WARNING] Failed to import "Katie Pilot": Invalid post type member
+[WARNING] Failed to import "Paul Jacobsen": Invalid post type member
+[WARNING] Failed to import "Jessica Ivins": Invalid post type member
+[WARNING] Failed to import "John Smith": Invalid post type member
+
